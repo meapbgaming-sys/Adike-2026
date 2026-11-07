@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adike 2026</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#101827;color:white;font-family:Arial}
+header{padding:22px;background:#17243a}
+h1{margin:0;color:#42d6a4}
+main{padding:16px}
+.card{background:#1e2d43;padding:20px;margin:12px 0;border-radius:14px}
+.card h2{margin:0 0 8px}
+button{background:#13a77b;color:white;border:0;padding:12px 18px;border-radius:8px}
+input,select{padding:12px;margin:6px 0;width:100%;border-radius:7px;border:0}
+</style>
+</head>
+<body>
+<header>
+<h1>Adike 2026</h1>
+<p>Arecanut Business Management</p>
+</header>
+<main>
+<h2>Work Dashboard</h2>
+<div class="card"><h2>Mane Kelsa</h2><p>House Work</p><button onclick="openWork('Mane Kelsa')">Open</button></div>
+<div class="card"><h2>Kone</h2><p>Garden Work</p><button onclick="openWork('Kone')">Open</button></div>
+<div class="card"><h2>Sulibele</h2><p>KG Based Daily Work</p><button onclick="openWork('Sulibele')">Open</button></div>
+<div class="card"><h2>Hande</h2><p>Daily Boiling Count</p><button onclick="openWork('Hande')">Open</button></div>
+<div class="card"><h2>Owner Account</h2><p>Business Money Records</p><button onclick="openWork('Owner Account')">Open</button></div>
+<div id="details" class="card" style="display:none">
+<h2 id="workTitle"></h2>
+<input type="date" id="date">
+<input placeholder="Worker name" id="worker">
+<input type="number" placeholder="KG / Daily Count" id="count">
+<input type="number" placeholder="Rate" id="rate">
+<input type="number" placeholder="Amount paid" id="paid">
+<button onclick="saveRecord()">Save Record</button>
+<div id="records"></div>
+</div>
+</main>
+<script>
+let current='';
+function openWork(name){
+current=name;
+document.getElementById('details').style.display='block';
+document.getElementById('workTitle').innerText=name;
+}
+function saveRecord(){
+let record={
+work:current,
+date:document.getElementById('date').value,
+worker:document.getElementById('worker').value,
+count:document.getElementById('count').value,
+rate:document.getElementById('rate').value,
+paid:document.getElementById('paid').value
+};
+let data=JSON.parse(localStorage.getItem('adikeRecords')||'[]');
+data.push(record);
+localStorage.setItem('adikeRecords',JSON.stringify(data));
+document.getElementById('records').innerText='Record saved successfully!';
+}
+</script>
+</body>
+</html>
