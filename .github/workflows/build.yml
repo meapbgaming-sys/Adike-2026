@@ -1,3 +1,4 @@
+
 name: Build Adike 2026 APK
 
 on:
@@ -20,6 +21,9 @@ jobs:
           distribution: temurin
           java-version: '17'
 
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
       - name: Install Android SDK
         run: |
           yes | sdkmanager --licenses
@@ -33,3 +37,4 @@ jobs:
         with:
           name: Adike-2026-APK
           path: app/build/outputs/apk/debug/app-debug.apk
+          
